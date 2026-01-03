@@ -1,0 +1,67 @@
+# Documentación de Librerías del Proyecto (PERN Stack)
+
+## 1. Dependencias de Desarrollo (devDependencies)
+Estas herramientas se utilizan únicamente durante la etapa de programación y no son necesarias cuando la aplicación ya está publicada en producción.
+
+### nodemon
+- **¿Qué es?** Una utilidad de monitoreo para aplicaciones Node.js.
+- **¿Para qué sirve?** Su función principal es mejorar la experiencia de desarrollo. Observa los archivos de tu proyecto y, cada vez que detecta que has guardado un cambio, reinicia automáticamente el servidor. Esto te evita tener que detener y volver a ejecutar el comando `node index.js` manualmente tras cada modificación.
+- **Ejemplo:** En tus scripts: `"dev": "nodemon index.js"`.
+
+### eslint
+- **¿Qué es?** Un "Linter" o herramienta de análisis de código estático para JavaScript.
+- **¿Para qué sirve?** Analiza tu código en busca de errores de sintaxis, malas prácticas, variables no utilizadas o violaciones de estilo. Ayuda a mantener el código limpio, consistente y libre de errores comunes antes de ejecutarlo.
+- **Ejemplo:** Te marcará en rojo si declaras `const x = 10;` y nunca usas `x`, o si estás usando una variable que no existe.
+
+---
+
+## 2. Dependencias de Producción (dependencies)
+Estas librerías son esenciales para que tu aplicación funcione correctamente en el servidor.
+
+### express
+- **¿Qué es?** El framework web más utilizado en Node.js.
+- **¿Para qué sirve?** Simplifica la creación del servidor, el manejo de rutas (URLs) y la gestión de peticiones y respuestas HTTP.
+- **Ejemplo:** `const app = express();`
+
+### pg
+- **¿Qué es?** El cliente de PostgreSQL para Node.js (node-postgres).
+- **¿Para qué sirve?** Permite que tu código JavaScript se conecte a la base de datos PostgreSQL para realizar consultas (SELECT, INSERT, etc.).
+- **Ejemplo:** `pool.query('SELECT * FROM tasks')`
+
+### cors
+- **¿Qué es?** Middleware para "Cross-Origin Resource Sharing".
+- **¿Para qué sirve?** Permite que navegadores o clientes desde dominios diferentes al del servidor (por ejemplo, un frontend en puerto 5173 conectando a un backend en puerto 3000) puedan solicitar recursos sin ser bloqueados por seguridad.
+- **Ejemplo:** `app.use(cors());`
+
+### morgan
+- **¿Qué es?** Un logger de solicitudes HTTP.
+- **¿Para qué sirve?** Imprime en la consola información útil sobre cada petición que recibe el servidor (método, ruta, código de estado, tiempo de respuesta). Es vital para depurar.
+- **Ejemplo:** `app.use(morgan('dev'));`
+
+### cookie-parser
+- **¿Qué es?** Middleware para analizar cookies.
+- **¿Para qué sirve?** Toma las cookies que vienen en las cabeceras de la petición (que son texto plano) y las convierte en un objeto JavaScript fácil de usar (`req.cookies`).
+- **Ejemplo:** Acceder a un token guardado: `req.cookies.token`.
+
+### jsonwebtoken
+- **¿Qué es?** Implementación del estándar JWT (JSON Web Tokens).
+- **¿Para qué sirve?** Se utiliza para la autenticación segura. Permite generar un token firmado cuando el usuario hace login, y verificar ese token en peticiones posteriores para saber quién es el usuario.
+- **Ejemplo:** `jwt.sign({ id: user.id }, 'secreto')`
+
+### zod
+- **¿Qué es?** Librería para declaración y validación de esquemas.
+- **¿Para qué sirve?** Asegura que los datos que entran a tu API (por ejemplo, en un registro de usuario) tengan el formato correcto (tipo de dato, longitud, formato de email, etc.) antes de procesarlos.
+- **Ejemplo:**
+  ```javascript
+  const schema = z.object({ email: z.string().email() });
+  schema.parse(data);
+  ```
+
+### express-promise-router
+- **¿Qué es?** Un reemplazo para el Router estándar de Express.
+- **¿Para qué sirve?** Permite usar funciones asíncronas (`async/await`) en tus rutas sin necesidad de envolver todo el código en bloques `try/catch`. Si una promesa falla, el error se pasa automáticamente al manejador de errores de Express.
+
+### md5
+- **¿Qué es?** Una función de hash criptográfica.
+- **¿Para qué sirve?** Convierte una entrada de datos en una cadena de texto de longitud fija (huella digital).
+- **Nota de seguridad:** MD5 se considera inseguro para hashear contraseñas hoy en día (se recomienda bcrypt o argon2). Se suele usar para generar identificadores simples o para servicios como Gravatar.
