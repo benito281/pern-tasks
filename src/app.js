@@ -15,8 +15,8 @@ app.get("/", (req, res) => {
         message:"Welcome to my API"
     })
 })
-app.use(taskRoutes)
-app.use(authRoutes)
+app.use('/api',taskRoutes)
+app.use('/api',authRoutes)
 
 
 app.get('/test', (req, res) => {
