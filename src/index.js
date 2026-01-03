@@ -1,2 +1,5 @@
-console.log("Hello, World!");
-console.log("This is the index.js file.🏃‍♂️");
+import app from './app.js'
+
+
+app.listen(3000);
+console.log('Server on port ', 3000)
