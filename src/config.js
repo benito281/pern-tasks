@@ -2,10 +2,10 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const DB_CONFIG = {
-  port: process.env.PORT || 5432,
-  host: process.env.HOST || "localhost",
-  user: process.env.USER || "postgres",
-  password: process.env.PASSWORD || "Mileming20133",
-  database: process.env.DATABASE || "tasksdb",
+  port: process.env.PORT,
+  host: process.env.HOST,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
 };
 export const SERVER_PORT = process.env.PORT_SERVER || 3000;

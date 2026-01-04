@@ -43,16 +43,29 @@ export const createTask = async (req, res,next) => {
   }
 };
 
-export const updateTask = (req, res) => res.send("Actualizando tarea");
+export const updateTask = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { title, description } = req.body;
+        const result = await pool.query("UPDATE tasks SET title = $1, description= $2 WHERE id = $3;", [title, description, id]);
+        if (result.rowCount === 0){
+            return res.status(404).json({ message: "Tarea no encontrada" });
+        }
+        return res.status(200).json({ message: "Tarea actualizada con exito" });
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+};
 
 export const deleteTask = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const result = await pool.query("DELETE FROM tasks WHERE id = $1", [id]);
+        const result = await pool.query("DELETE FROM tasks WHERE id = $1 ", [id]);
         if (result.rowCount === 0){
             return res.status(404).json({ message: "Tarea no encontrada" });
         }
-        return res.send("tarea eliminada con exito");
+        return res.status(200).json({ message: "Tarea eliminada con exito" });
     } catch (error) {
         console.error(error);
         next(error);
