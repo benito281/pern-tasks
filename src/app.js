@@ -18,12 +18,6 @@ app.get("/", (req, res) => {
 app.use('/api',taskRoutes)
 app.use('/api',authRoutes)
 
-
-app.get('/test', (req, res) => {
-    throw new Error('My custom error!')
-    res.send("test")
-})
-
 //Error handler
 app.use((err, req, res, next) => {
     res.status(500).json({
@@ -31,8 +25,6 @@ app.use((err, req, res, next) => {
         message: err.message
     })
 })
-
-
 
 
 export default app;

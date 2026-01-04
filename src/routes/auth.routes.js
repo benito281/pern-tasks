@@ -1,10 +1,15 @@
-import { Router } from 'express'
+import { Router } from "express";
+import {
+  signin,
+  signup,
+  signout,
+  profile,
+} from "../controllers/auth.controller.js";
 const router = Router();
 
-router.post('/signin', (req,res) => res.send('Ingresando'))
-router.post('/signup', (req,res) => res.send('Registrando'))
-router.post('/signout', (req,res) => res.send('Cerrando sesión'))
-router.get('/profile', (req,res) => res.send('Perfil del usaurio'))
-
+router.post("/signin", signin);
+router.post("/signup", signup);
+router.post("/signout", signout);
+router.get("/profile", profile);
 
 export default router;
