@@ -47,6 +47,9 @@ Estas librerías son esenciales para que tu aplicación funcione correctamente e
 - **¿Qué es?** Implementación del estándar JWT (JSON Web Tokens).
 - **¿Para qué sirve?** Se utiliza para la autenticación segura. Permite generar un token firmado cuando el usuario hace login, y verificar ese token en peticiones posteriores para saber quién es el usuario.
 - **Ejemplo:** `jwt.sign({ id: user.id }, 'secreto')`
+Payload: es un dato que se genera que ira dentro del token.
+Se crea un promise para crear que interactue con el async await
+
 
 ### zod
 - **¿Qué es?** Librería para declaración y validación de esquemas.
