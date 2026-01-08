@@ -1,4 +1,4 @@
-import { Router } from "express";
+import Router from "express-promise-router";
 import {
   getAllTasks,
   getTask,
@@ -6,12 +6,13 @@ import {
   updateTask,
   deleteTask,
 } from "../controllers/tasks.controller.js";
-const router = Router();
 
-router.get("/tasks", getAllTasks);
-router.get("/tasks/:id", getTask);
-router.post("/tasks", createTask);
-router.put("/tasks/:id", updateTask);
-router.delete("/tasks/:id", deleteTask);
+import { isAuth } from "../middlewares/auth.middleware.js";
+const router = Router();
+router.get("/tasks", isAuth, getAllTasks);
+router.get("/tasks/:id",isAuth, getTask);
+router.post("/tasks", isAuth, createTask);
+router.put("/tasks/:id", isAuth, updateTask);
+router.delete("/tasks/:id", isAuth, deleteTask);
 
 export default router;
