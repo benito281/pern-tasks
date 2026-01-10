@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import {ACCESS_TOKEN_SECRET} from "../config.js";
+
 //Middleware para proteger rutas
 export const isAuth = (req, res, next) => {
   const token = req.cookies.token;
@@ -12,6 +13,6 @@ export const isAuth = (req, res, next) => {
     }
     req.userID = decoded.id;
     
+    next();
   });
-  next();
 };
