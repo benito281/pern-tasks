@@ -19,12 +19,14 @@ export const signin = async (req, res, next) => {
 
     if (!validPassword)
       return res.status(400).json({ message: "Contraseña incorrecta" });
-    const token = await createAccessToken({ id: result.rows[0].id });
-    res.cookie("token", token, {
-      sameSite: "none",
-      maxAge: 24 * 60 * 60 * 1000,
-      httpOnly: true,
-    });
+      const token = await createAccessToken({ id: result.rows[0].id });
+      res.cookie("token", token, {
+        secure: true,
+        sameSite: "none",
+        maxAge: 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        
+      });
     return res.status(200).json(result.rows[0]);
   } catch (error) {
     console.log(error);
@@ -44,14 +46,16 @@ export const signup = async (req, res, next) => {
     const token = await createAccessToken({ id: result.rows[0].id });
     res.cookie("token", token, {
       sameSite: "none",
+      secure: true,
       maxAge: 24 * 60 * 60 * 1000,
       httpOnly: true,
     });
     return res.json(result.rows[0]);
     //res.send(`Registrando usuario ${username} con email ${email}`);
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Error al registrar el usuario" });
+   if (error.code === "23505") {
+      return res.status(400).json({ message: "Ya existe un usuario con ese email" });
+    }
     next(error);
   }
 };
