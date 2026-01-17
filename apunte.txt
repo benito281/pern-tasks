@@ -68,3 +68,5 @@ Se crea un promise para crear que interactue con el async await
 - **¿Qué es?** Una función de hash criptográfica.
 - **¿Para qué sirve?** Convierte una entrada de datos en una cadena de texto de longitud fija (huella digital).
 - **Nota de seguridad:** MD5 se considera inseguro para hashear contraseñas hoy en día (se recomienda bcrypt o argon2). Se suele usar para generar identificadores simples o para servicios como Gravatar.
+
+HORA DEL VIDEO 3:03:16 Register FORM
